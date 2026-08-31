@@ -1,8 +1,8 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getFunctions } from "firebase/functions";
-import { getStorage } from "firebase/storage";
+import {getApp, getApps, initializeApp} from "firebase/app";
+import {getAuth} from "firebase/auth";
+import {getFirestore} from "firebase/firestore";
+import {getFunctions} from "firebase/functions";
+import {getStorage} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAUx6io81JRSITEpHGE4kzIZG8YnHg0oWE",
@@ -19,6 +19,4 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-
-// ต้องตรงกับ Region ที่ Deploy Function
 export const functions = getFunctions(app, "asia-southeast1");
