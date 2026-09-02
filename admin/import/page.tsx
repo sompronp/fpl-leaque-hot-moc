@@ -10,7 +10,7 @@ import {
   User,
 } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
-import { auth, functions } from "../../firebase";
+import { auth, functions } from "../../app/firebase";
 export default function ImportExcelPage() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
