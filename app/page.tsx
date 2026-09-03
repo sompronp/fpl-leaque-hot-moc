@@ -205,7 +205,17 @@ setFileName(file.name);
         );
 
         if (!rows.length) throw new Error('ไม่พบข้อมูลใน Sheet');
+const columns = Object.keys(rows[0]);
 
+const missingColumns = REQUIRED_COLUMNS.filter(
+  (column) => !columns.includes(column)
+);
+
+if (missingColumns.length > 0) {
+  throw new Error(
+    `ไม่พบคอลัมน์สำคัญ: ${missingColumns.join(", ")}`
+  );
+}
       const columns = Object.keys(rows[0]);
 
 const missingColumns = REQUIRED_COLUMNS.filter(
