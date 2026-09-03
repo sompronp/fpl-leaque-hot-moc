@@ -202,9 +202,10 @@ setFileName(file.name);
         const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(
           worksheet,
           { defval: '' }
-        );
+        if (!rows.length) {
+  throw new Error("ไม่พบข้อมูลใน Sheet");
+}
 
-        if (!rows.length) throw new Error('ไม่พบข้อมูลใน Sheet');
 const columns = Object.keys(rows[0]);
 
 const missingColumns = REQUIRED_COLUMNS.filter(
@@ -216,12 +217,19 @@ if (missingColumns.length > 0) {
     `ไม่พบคอลัมน์สำคัญ: ${missingColumns.join(", ")}`
   );
 }
-      const columns = Object.keys(rows[0]);
 
-const missingColumns = REQUIRED_COLUMNS.filter(
-  (column) => !columns.includes(column)
-);
-
+const parsedTeams = rows
+  .map((row) => ({
+    rank: number(row["Rank"]),
+    teamName: text(row["Team"]),
+    managerName: text(row["Manager"]),
+    scoreGW: number(row["Score(GW)"]),
+    hits: number(row["Hits"]),
+    netScore: number(row["Net Score"]),
+    totalPoints: number(row["Total"]),
+    captain: text(row["Captain"]),
+    fplId: text(row["FPL ID"]),
+  }))
 if (missingColumns.length > 0) {
   throw new Error(
     `ไม่พบคอลัมน์สำคัญ: ${missingColumns.join(", ")}`
