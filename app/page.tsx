@@ -9,10 +9,12 @@ import {
   User,
 } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
-import { auth, functions } from "../../app/firebase";
 
-// --- กำหนด Constants และ Types ที่หายไป ---
-const ADMIN_EMAIL = "sompronp1320@gmail.com"; //
+// 1. แก้ไข Import Path ตรงนี้ (ถ้ายัง Error ให้ลองเปลี่ยนเป็น "@/app/firebase")
+import { auth, functions } from "../../firebase";
+
+// 2. ย้าย ADMIN_EMAIL และตัวแปรตั้งต้นต่างๆ มาไว้นอก Component ให้ถูกต้อง
+const ADMIN_EMAIL = "sompronp@scg.com"; // ใส่อีเมลของคุณตรงนี้
 const REQUIRED_COLUMNS = [
   "Rank",
   "Team",
@@ -36,7 +38,6 @@ interface TeamPreview {
   captain: string;
   fplId: string;
 }
-// ------------------------------------
 
 export default function ImportExcelPage() {
   const [fileName, setFileName] = useState("");
@@ -217,7 +218,6 @@ export default function ImportExcelPage() {
 
         const worksheet = workbook.Sheets[sheetName];
         
-        // --- แก้ไขวงเล็บที่หายไป ---
         const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(
           worksheet,
           { defval: "" }
@@ -236,7 +236,6 @@ export default function ImportExcelPage() {
           throw new Error(`ไม่พบคอลัมน์สำคัญ: ${missingColumns.join(", ")}`);
         }
 
-        // --- แก้ไขการลบโค้ดบล็อกที่ซ้ำซ้อนทิ้งไป ---
         const parsedTeams = rows
           .map((row) => ({
             rank: number(row["Rank"]),
@@ -415,7 +414,6 @@ export default function ImportExcelPage() {
         {teams.length > 0 && (
           <>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {/* --- แก้ไข Syntax String Template ให้ถูกต้อง --- */}
               <SummaryCard
                 label="จำนวนทีม"
                 value={`${summary.teamCount} ทีม`}
