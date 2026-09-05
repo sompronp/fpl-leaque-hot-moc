@@ -12,7 +12,7 @@ import { httpsCallable } from "firebase/functions";
 import { auth, functions } from "../../app/firebase";
 
 // --- กำหนด Constants และ Types ที่หายไป ---
-const ADMIN_EMAIL = "admin@example.com"; // เปลี่ยนเป็น Email Admin ของคุณ
+const ADMIN_EMAIL = "sompronp1320@gmail.com"; //
 const REQUIRED_COLUMNS = [
   "Rank",
   "Team",
