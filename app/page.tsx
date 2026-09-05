@@ -30,7 +30,7 @@ export default function ImportExcelPage() {
       console.error("Google login error:", error);
   
       setPublishMessage(
-        "Login ไม่สำเร็จ กรุณาตรวจว่าเปิด Google Sign-In และเพิ่ม StackBlitz domain ใน Firebase Authentication แล้ว"
+        "Login ไม่สำเร็จ กรุณาตรวจว่าเปิด Google Sign-In และเพิ่มโดเมน Vercel ใน Firebase Authentication → Authorized domains แล้ว"
       );
     }
   }
